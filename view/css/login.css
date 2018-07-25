@@ -1,0 +1,66 @@
+#header{
+    border-bottom:solid #ccc 1px;
+    background:#eee;
+}
+header{
+    height:65px;
+    line-height:65px;
+    text-align:center;
+}
+header img{
+    vertical-align: middle;
+}
+#container{
+    position:relative;
+    height:auto;
+    bottom:0;
+    display: table; 
+}
+#main{
+    width:350px;
+    margin-top:11%;
+}
+#loginform{
+    border: 1px solid #ccc;   
+    background:#fff;
+    float:left;
+    width:100%;
+    line-height:230%;
+}
+
+label.data{
+    width:310px;
+    color:#000;
+    float:left;
+    padding:15px 20px 0;
+   
+    
+    
+}
+label.submit{
+    width:310px;
+    line-height:260%;
+    float:left;
+    margin-top:20px;
+    padding: 20px;
+    background:#efefef;
+}
+#loginform input[type="text"],#loginform input[type="password"]{
+    width:305px;
+}
+#ckcodeimg{
+    margin-top:2px;
+    cursor:pointer;
+}
+
+#loginBtn{
+    *margin-top:-30px;
+}
+.btn{
+    padding: 4px 10px;
+}
+i.icon-enter.icon-white{
+ padding:0 15px 0 0;
+ float:left;
+ margin-top:3px;
+}

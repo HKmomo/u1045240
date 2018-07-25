@@ -1,0 +1,162 @@
+/***default************************/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-size: 100%;
+        vertical-align: top;
+        background: transparent;
+    }
+p{
+    margin-bottom:20px;
+}
+img{ 
+        border: 0;
+    }
+    
+:focus{
+        outline: 0;
+    }
+    
+ol, ul, li{
+        list-style: none;
+    }
+
+blockquote, q{
+        quotes: none;
+    }
+    
+blockquote:before, blockquote:after, q:before, q:after{
+        content: '';
+        content: none;
+    }
+ 
+
+/* remember to highlight inserts somehow! */
+ins{
+        text-decoration: none;
+    }
+
+del{
+        text-decoration: line-through;
+    }
+
+
+/* **************************** */
+body{
+        font-size: 13px;
+        color: #666;
+        font-family:Arial, Helvetica, sans-serif;
+        line-height: 160%;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: none;
+        background-attachment: fixed;
+    	background-repeat: repeat-y;
+    	background-position:left top;
+    	background: url("http://test.ideamax.com.tw/mgr/images/patterns/2.png") repeat scroll 0 0 transparent;
+        
+      
+    }
+    
+a{ 
+        color: #000; 
+        text-decoration: none; 
+        cursor:hand;
+    }
+    
+a:hover{ 
+        color: #9c074e;
+        text-decoration: none; 
+        cursor:hand;
+    }    
+    
+a.active{ 
+        color: #9c074e;
+        
+    } 
+    
+.clear{
+        clear: both; 
+        zoom: 1; 
+    }
+    
+.clear:after{
+        clear: both;
+        content: ''; 
+        display: block;
+        height: 0;
+        visibility: hidden; 
+    }
+    
+.hidden{
+        display: none;
+        visibility: hidden;
+    } 
+#wrapper,.full{
+    width:100%;
+    float:left;
+}    
+.container{
+        width:980px;
+        margin:0 auto;
+        height:100%;
+    }
+
+
+.error{
+    color:red;
+}
+.right{
+    float:right;
+}
+
+h1{
+       
+    }
+    
+h2{
+       
+    }
+h3{
+     margin-left:30px;
+     font-size:20px;
+     font-weight:bold;   
+    }
+    
+.shbox{
+       zoom : 1;
+       -webkit-box-shadow : 0px 0px 20px #000; /* Safari and Chrome    水平偏移（可取正负值）；垂直偏移（可取正负值）；模糊；阴影颜色         */ 
+          -moz-box-shadow : 0px 0px 20px #000; /* Opera 10.5+, future browsers and IE6+ using IE-CSS3 */
+               box-shadow : 0px 0px 10px #ccc; /* Firefox */
+         
+                 behavior : url(/css/ie-css3.htc); /* This lets IE know to call the script on all elements which get the 'box' class */      
+                   border : 1px solid #ccc;
+}
+.radius{  
+    zoom:1;         
+       -moz-border-radius : 10px; /* Firefox */
+    -webkit-border-radius : 10px; /* Safari and Chrome */
+            border-radius : 10px; /* Opera 10.5+, future browsers, and now also Internet Explorer 6+ using IE-CSS3 */
+    
+                 behavior : url(/css/ie-css3.htc);
+}    
+.gradient-white{
+         background : #FAFAFA;
+         background : -webkit-gradient(linear, 0 0, 0 bottom, from(#FAFAFA), to(#DCDCDC));
+         background : -webkit-linear-gradient(#FAFAFA, #DCDCDC);
+         background : -moz-linear-gradient(#FAFAFA, #DCDCDC);
+         background : -ms-linear-gradient(#FAFAFA, #DCDCDC);
+         background : -o-linear-gradient(#FAFAFA, #DCDCDC);
+         background : linear-gradient(#FAFAFA, #DCDCDC);
+    -pie-background : linear-gradient(#FAFAFA, #DCDCDC);
+           behavior : url(/css/pie/PIE.htc);
+}
+i{
+width:10px;
+height:10px;
+}
+ 
