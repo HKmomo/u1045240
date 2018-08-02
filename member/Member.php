@@ -2,11 +2,12 @@
 class Member
 {
 	private $sql;
-	private $pageNum = 50;
 	private $conn;
 	
 	function __construct()
 	{
+	    $GLOBALS["db"]  = new _Connection;
+	    $GLOBALS["db"]->connect();
 		$this->conn = $GLOBALS["db"]->getConnection();
 	}
 	
@@ -21,17 +22,34 @@ class Member
 	}
 	
 	
-	public function add($vars)
+	public function addout($vars)
 	{
-		$this->sql = "INSERT INTO xxx(XX,XX,XX) VALUES(?,?,?)";
+		$this->sql = "INSERT INTO outsouring(STATUS,UNIT,COMPANY,EID,NAME,WCONTEXT,PTEL,EMERG) VALUES(?,?,?,?,?,?,?,?)";
 		
 		$stmt = $this->conn->prepare($this->sql);
-		$stmt->bind_param('sss', $vars["XXX"], $vars["XXX"], $vars["XXX"]);
+		$stmt->bind_param('isssssss', $vars["STATUS"], $vars["UNIT"], $vars["COMPANY"],$vars["EID"],$vars["NAME"],$vars["WCONTEXT"],$vars["PTEL"],$vars["EMERG"]);
 		$stmt->execute();
 	}
 	
+	public function upout($EID)
+	{
+	    $this->sql = "update outsourcing set STATUS ='2'  WHERE EID=?";
+	    $stmt = $this->conn->prepare($this->sql);
+	    $stmt->bind_param('s', $EID);
+	    $stmt->execute();
+	    $stmt->close();
+	}
 	
-	public function updateMember($vars)
+	public function delout($EID)
+	{
+	    $this->sql = "delete from outsourcing WHERE EID=?";
+	    $stmt = $this->conn->prepare($this->sql);
+	    $stmt->bind_param('s', $EID);
+	    $stmt->execute();
+	    $stmt->close();
+	}
+	
+/*	public function updateMember($vars)
 	{
 		$this->sql = "UPDATE XXX SET XXX=? WHERE id=?";
 		$stmt = $this->conn->prepare($this->sql);
@@ -39,20 +57,34 @@ class Member
 		$stmt->execute();
 		$stmt->close();
 	}
-	
+*/		
 	
 	public function getList($vars)
 	{
-		$this->sql = "SELECT * FROM XXX WHERE ";
-		
-		$GLOBALS["db"]->prepare($this->sql);
-		$GLOBALS["db"]->query();
-		$list = $GLOBALS["db"]->fetch('object');
-		return $list;
+	    $this->sql = "SELECT STATUS,UNIT,COMPANY,EID,NAME,WCONTEXT,PTEL,EMERG from outsourcing";
+	    $GLOBALS["db"]->prepare($this->sql);
+	    $GLOBALS["db"]->query();
+	    $list = $GLOBALS["db"]->fetch('object');
+	    $GLOBALS["db"]->disconnect();
+	    return $list;
+	    
+	    
+	}
+	public function detail($vars)
+	{
+	    $this->sql = "SELECT * FROM outsourcing WHERE EID='".$vars["eid"]."'";
+	    
+	    $GLOBALS["db"]->prepare($this->sql);
+	    $GLOBALS["db"]->query();
+	    $list = $GLOBALS["db"]->fetch('');
+	    $GLOBALS["db"]->disconnect();
+	    return $list;
 	}
 	
+
 	
-	public function getInfo($vars)
+	
+/*	public function getInfo($vars)
 	{
 		$this->sql = "SELECT * FROM XXX WHERE userId=".$vars["userId"];
 	
@@ -61,6 +93,6 @@ class Member
 		$list = $GLOBALS["db"]->fetch('object');
 		return $list;
 	}
-	
+*/	
 }
 ?>

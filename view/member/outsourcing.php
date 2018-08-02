@@ -1,3 +1,4 @@
+<html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">" type="text/javascript"></script>
 <script>
@@ -5,23 +6,20 @@ $(function() {
 	$('#checkall').click(function(){
 		$("input[name='EID[]'").prop("checked",$(this).prop("checked"));
 		});
-      });
-$(function(){  
-    $('#delete').click(function() {
-        $("input[name='EID[]']:checked").each(function() { // 遍历选中的checkbox
-            n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-            $('table input:checked').parents('tr').remove();  
-        });
-    });
 });
-  
-    
+function doEdit(id)
+{
+	location.href="./?edit&eid=" + id;
+}
+
+function doAdd()
+{
+	location.href="./?add;
+}
 
 
 </script>
 </head>
-
-<html>
 <table border="1" cellpadding="5" style="float:left; border:3px #000000 solid;text-align:center;">
 <tr><td colspan="2">單位</td></tr>
 <tr><td colspan="2"><font color="red">資訊室</font></td></tr>
@@ -30,18 +28,14 @@ $(function(){
 <tr><td>總務室</td><td>1</td></tr>
 </table>
 
-<form name="list" method="post">
+<form name="list" method="post" action="./">
 <input type="hidden" name="c" value="member">
-<input type="hidden" name="m" value="delout">
+<input type="hidden" name="m" value="delete">
 &emsp;&emsp;請輸入查詢<br>&emsp;&emsp;[工作證號]或[身分證號]<br>&emsp;&emsp;<input type="text" name="EID" /><br><br>  
-&emsp;&emsp;<button type="submit" name="insert" value="新增" >新增</button>
-<button type='submit' id='delete'  value='刪除'  >刪除</button>
-</form>
+&emsp;&emsp;<button type="button" name="insert" onclick='doAdd()' >新增</button>
+<button type='submit' id='delete' name="del" value='刪除'  >刪除</button>
+<button type='submit' id='update' name="upd" value='離職'  >離職</button>
 
-
-<form name="list" method="post">
-<input type="hidden" name="c" value="member">
-<input type="hidden" name="m" value="index">
 <table style="float:Right; BORDER-COLLAPSE: collapse" border="2" cellSpacing="1" id="out" display:inline; borderColor="#99cc00" cellPadding="3" width="90%" bgColor="#ffffff">
   <thead class="title">
     <tr bgcolor="#c3e1b4">
@@ -58,19 +52,14 @@ $(function(){
     </tr>
   </thead>
   <tbody>
-</html>
-
 <?php 
 if (count($this->object)>0){
     for ($i=0;$i<count($this->object);$i++)
-    {
-        
+    {   
     ?>
     <tr>
-    
       <td align="center">
-      <input type="checkbox" name="EID[]" value="<?php echo($this->object[$i]->EID);?>">
-      <input type="hidden" name="STATUS[]" VALUE="<?php echo($this->object[$i]->STATUS);?>">
+     <input type="checkbox" name="EID[]" value="<?php echo($this->object[$i]->EID);?>">
       </td>
       <td align="center"><?php echo($this->object[$i]->STATUS);?></td>
       <td align="center"><?php echo($this->object[$i]->UNIT);?></td>
@@ -80,14 +69,14 @@ if (count($this->object)>0){
       <td align="center"><?php echo($this->object[$i]->WCONTEXT);?></td>
       <td align="center"><?php echo($this->object[$i]->PTEL);?></td>
       <td align="center"><?php echo($this->object[$i]->EMERG);?></td>
-      <td align="center"><button type='button' class='btn_detial' >修改</button>
-       <a href="#" onClick="addfav('<?php echo($this->object[$i]->EID);?>');return false">
-       </a></td>
+      <td align="center"><button type='button' class='btn_detial' onclick="doEdit('<?php echo($this->object[$i]->EID);?>')">修改</button></td>
     </tr>
     <?php }
      }else{?>
     <tr>
-      <td colspan="8" align="center"><font color="#ff0000">查無資料</font>
+      <td colspan="10" align="center"><font color="#ff0000">查無資料</font>
     <?php }?>
   </tbody>
 </table>
+</form>
+</html>

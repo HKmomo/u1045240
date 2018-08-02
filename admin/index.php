@@ -83,10 +83,36 @@ class AdminController
 	function home($vars)
 	{
 		include_once ("../common/Session.php");
-		$this->setContent("../view/admin/doctor.php");
 		$this->view($GLOBALS["adminContent"]);
 	}
 	
+	function delout($vars)
+	{
+	    $this->member = new Member();
+	    $status = "";
+	    for ($i=0;$i<sizeof($_REQUEST["EID"]);$i++)
+	    {
+	        if ($_POST["STATUS"][$i]=="1")
+	        {
+	            $status = "2";
+	        }else{
+	            $status = "1";
+	        }
+	        $status = "1";
+	        $this->member->delout($_POST["EID"][$i], $status);
+	    }
+	    //$this->member->delout($vars);
+	    $this->setContent("../view/admin/doctor.php");
+	    $this->view($GLOBALS["adminContent"]);
+	}
+	
+	function add($vars)
+	{
+	    $this->member = new Member();
+	    $this->member->add($vars);
+	    $this->setContent("../view/admin/join.php");
+	    $this->view($GLOBALS["admincontent"]);
+	}
 	
 	/**
 	 * 登出

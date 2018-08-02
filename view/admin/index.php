@@ -95,7 +95,7 @@ function doLogin()
         		{
         			document.getElementById("msg").innerHTML = "<font style=\"font-size:12pt\">帳號或密碼錯誤</font>";
         		}else{
-    				location.href= "admin/?home";
+    				location.href= "member/?outsourcing";
         		}
     			msg = "";
     	    } else {

@@ -19,7 +19,7 @@ class Admin
 	{
 		$GLOBALS["db"]->getConnection();
 		
-		$sql = "SELECT * FROM manager Where id='". $GLOBALS["db"]->escape($vars["id"]) .
+		$sql = "SELECT * FROM user Where id='". $GLOBALS["db"]->escape($vars["id"]) .
 		"' AND pwd='". $GLOBALS["db"]->escape($vars["pwd"])."'";
 		
 		$GLOBALS["db"]->prepare($sql);
