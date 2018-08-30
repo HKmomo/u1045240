@@ -33,6 +33,10 @@ class AdminController
 				header("Location: /");
 				exit;
 			}else{
+			    if($vars["m"] != "outsourcing")
+			    {
+			        include_once ("../common/Session.php");
+			    }
 				$this->$vars["m"]($vars);
 			}
 		}
@@ -86,33 +90,79 @@ class AdminController
 		$this->view($GLOBALS["adminContent"]);
 	}
 	
-	function delout($vars)
+	
+	
+	function search($vars)
 	{
-	    $this->member = new Member();
-	    $status = "";
-	    for ($i=0;$i<sizeof($_REQUEST["EID"]);$i++)
-	    {
-	        if ($_POST["STATUS"][$i]=="1")
-	        {
-	            $status = "2";
-	        }else{
-	            $status = "1";
-	        }
-	        $status = "1";
-	        $this->member->delout($_POST["EID"][$i], $status);
-	    }
-	    //$this->member->delout($vars);
-	    $this->setContent("../view/admin/doctor.php");
+	    $this->admin = new Admin();
+	    $this->object = $this->admin->getuser($vars);
+	    $this->setContent($this->path."search.php");
+	    $this->view($GLOBALS["adminContent"]);
+	}
+
+	function adduser($vars)
+	{
+	    $this->admin = new Admin();
+	    $this->object = $this->admin->adduser($vars);
+	    $this->setContent($this->path."add.php");
 	    $this->view($GLOBALS["adminContent"]);
 	}
 	
-	function add($vars)
+	function addinfo($vars)
 	{
-	    $this->member = new Member();
-	    $this->member->add($vars);
-	    $this->setContent("../view/admin/join.php");
-	    $this->view($GLOBALS["admincontent"]);
+	    $this->admin = new Admin();
+	    $this->object = $this->admin->adduser($vars);
+	    header("Location: ./?search");
+	    exit;
 	}
+	
+	function edituser($vars)
+	{
+	    $this->admin = new admin();
+	    $this->object = $this->admin->userdetail($vars);
+	    $this->setContent($this->path."edit.php");
+	    $this->view($GLOBALS["adminContent"]);
+	}
+	
+	function editinfo($vars)
+	{
+	    $this->admin = new admin();
+	    $this->object = $this->admin->upuser($vars);
+	    header("Location: ./?search");
+	    exit;
+	}
+	
+	function checkuser($vars)
+	{
+	    $this->admin = new admin();
+	    $this->object = $this->admin->userdetail($vars);
+	    if(count($this->object)>0)
+	    {
+	        echo("error");
+	        exit;
+	    }
+	    
+	}
+	
+
+	function delete($vars)
+	{
+	    $this->admin = new admin();
+	    
+	    for ($i=0;$i<sizeof($_REQUEST["id"]);$i++)
+	    {
+	        if (!empty($vars["del"]))
+	        {
+	            $this->admin->deluser($_POST["id"][$i]);
+	        }
+	    }
+	    header("Location: ./?search");
+	    exit;
+	}
+	
+	
+	
+	
 	
 	/**
 	 * 登出
@@ -120,7 +170,9 @@ class AdminController
 	function logout($vars)
 	{
 		session_destroy();
-		$this->index(null);
+		//$this->index(null);
+	    //session_unset();
+		header("Location: /");
 	}
 	
 		

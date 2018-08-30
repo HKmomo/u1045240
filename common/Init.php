@@ -14,7 +14,7 @@ class _Init
 		$this->getDb();
 		// 變數設定
 		$this->setting();
-		$GLOBALS["adminContent"] = "../view/admin/home.php";
+		$GLOBALS["adminContent"] = "../view/content.php";
 	}
 	
 	function setting()

@@ -22,7 +22,7 @@ class IndexController
         
         $init = new _Init();
         $vars = $init->getVars();
-        
+        session_unset();
         if (empty($vars["m"]))
         {
             $this->index($vars);
@@ -32,6 +32,10 @@ class IndexController
                 header("Location: /");
                 exit;
             }else{
+                if($vars["m"] != "login" && $vars["m"] != "index")
+                {
+                    include_once ("common/Session.php");
+                }
                 $this->$vars["m"]($vars);
             }
         }
@@ -70,13 +74,20 @@ class IndexController
         $this->admin = new Admin();
         // 帳號及密碼驗證
         $this->object = $this->admin->getAdmin($vars);
-        
+ 
         if (count($this->object)<=0){
             echo("N");
+            header("Location: /");
+            exit;
         }else{
             echo("Y");
             $_SESSION["userId"] = $vars["id"];
+            $_SESSION["types"] = $this->object->types;
+            $_SESSION["dept"] = $this->object->dept;
+            $_SESSION["deptId"] = $this->object->deptId;
         }
     }
 }
+
+
 ?>

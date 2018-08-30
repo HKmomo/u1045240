@@ -8,11 +8,13 @@ class MemberController
     
     private $object;
     
+    private $dept;
+    
     private $vars;
     
     private $page;
     
-    private $path = "../view/admin/home.php";
+    private $path = "../view/member/";
     
     function __construct()
     {
@@ -20,7 +22,7 @@ class MemberController
         $init = new _Init();
         $this->vars = $init->getVars();
         $vars = $this->vars;
-        
+       
         if (! empty($vars["s"])) {
             include_once ("../common/Session.php");
         }
@@ -30,6 +32,10 @@ class MemberController
             header("Location: /");
             exit();
         } else {
+            if($vars["m"] != "login" && $vars["m"] != "index")
+            {
+                include_once ("../common/Session.php");
+            }
             $this->$vars["m"]($vars);
         }
     }
@@ -57,14 +63,16 @@ class MemberController
     {
         return $this->object;
     }
+    
     function outsourcing($vars)
-    {       $this->member = new Member();
-            $this->object = $this->member->getList($vars);
-            $this->setContent("../view/member/outsourcing.php");
-            $this->view($GLOBALS["adminContent"]);
-            
-            
+    {       
+        $this->member = new Member();
+        $_SESSION["UNIT"] = $this->member->UNIT($vars);
+        $this->object = $this->member->getList($vars);
+        $this->setContent($this->path."outsourcing.php");
+        $this->view($GLOBALS["adminContent"]);
     }
+    
     
 /*    function change($vars)
     {
@@ -104,23 +112,72 @@ class MemberController
         }
         header("Location: ./?outsourcing");
         exit;
-        //$this->setContent("../view/member/outsourcing.php");
-        //$this->view($GLOBALS["adminContent"]);
     }
 
     function edit($vars)
     {
         $this->member = new Member();
         $this->object = $this->member->detail($vars);
-        $this->view("../view/member/edit.php");
+        $this->setContent($this->path."edit.php");
+        $this->view($GLOBALS["adminContent"]);
+    }
+    
+    function editInfo($vars)
+    {
+        $member = new Member();
+        $member->updateInfo($vars);
+        header("Location: ./?outsourcing");
+        exit;
     }
   
     function add($vars)
     {
+ 
+        $this->setContent($this->path."add.php");
+        $this->view($GLOBALS["adminContent"]);
+    }
+    
+    /*
+    function addInfo($vars)
+    {
+        $this->member = new Member();
+        
+        //use vars to insert EID number
+        $this->object = $this->member->addout($vars);
+        $this->setContent($this->path."add.php");
+        $this->view($GLOBALS["adminContent"]);
+    
+    }
+    */
+    
+    function addInfo($vars)
+    {
         $this->member = new Member();
         $this->object = $this->member->addout($vars);
-        $this->view("../view/member/add.php");
+        header("Location: ./?outsourcing");
+        exit;
     }
+    
+    function nupdate($vars)
+    {
+        $this->member = new Member();
+        $this->object = $this->member->updateInfo($vars);
+        header("Location: ./?outsourcing");
+        exit;
+    }
+    
+ /*   function getdept($vars)
+    {
+        $this->member = new member();
+        $this->object = $this->member->dept($vars);
+        $this->view("../view/content.php");
+
+      
+    }
+ */
+ 
+    
+
   
 }
  ?>
